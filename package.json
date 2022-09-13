@@ -1,8 +1,8 @@
 {
-  "name": "react-hw-04-image-finder",
+  "name": "react-hw-03-image-finder",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/Gregory0401/goit-react-hw-04-phonebook/",
+  "homepage": "https://github.com/Gregory0401/react-hw-03-phonebook/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
