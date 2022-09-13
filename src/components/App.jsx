@@ -7,12 +7,7 @@ import { nanoid } from 'nanoid'
 import {useState, useEffect} from 'react';
 
  export default function App() {
-    // const [contacts, setContacts] = useState([
-    //    { id: 'id-1', name: 'Cristiano Ronaldo', number: '459-12-56' },
-    //    { id: 'id-2', name: 'Harry Kane', number: '443-89-12' },
-    //    { id: 'id-3', name: 'Erling Haaland', number: '645-17-79' },
-    //    { id: 'id-4', name: 'Raheem Sterling', number: '227-91-26' },
-    //    ])
+
 const [contacts, setContacts] = useState(JSON.parse(localStorage.getItem('contacts')));
 
     const [filter, setFilter] = useState('');
