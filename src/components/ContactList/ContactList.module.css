@@ -16,9 +16,12 @@ font-weight: 700;
     align-items: center;
     cursor:pointer;
     text-align: end;
+    margin-left: 10px;
 }
 .button:hover{
-    transform: scale(1.5);
+    transform: scale(1.6);
+    background-color: rgb(100, 0, 0, 0.2);
+    border-radius: 50%;
 }
 .list{
     padding-left: 10px;
