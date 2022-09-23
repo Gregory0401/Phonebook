@@ -1,60 +1,32 @@
-import React from 'react';
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactList/ContactList';
-import Filter from '../components/Filter/Filter';
-import s from '../components/Filter/Filter.module.css';
-import { nanoid } from 'nanoid';
-import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from './redux/contactsSlice';
-import { deleteContact } from './redux/contactsSlice';
-import { changeFilter } from './redux/contactsSlice';
+import { React, useState } from 'react';
+import { Layout } from './Layout';
+import {Modal} from '../components/Modal/Modal'
 
 export default function App() {
-  const {
-    contacts: { items: contacts },
-  } = useSelector(state => state);
+  const [showModal, setShowModal] = useState(false);
+ const [qwe, setQwe] = useState(true);
 
-  const filter = useSelector(state => state.contacts.filter);
+  const onCloseModal = () => {
+    setShowModal(true);
   
-  const dispatch = useDispatch();
-  
-  const OnSubmit = (name, number) => {
-    if (
-      contacts.find(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-      )
-    ) {
-      return alert(`${name} is already in contacts.`);
-    }
-    dispatch(addContact({ id: nanoid(), name, number }));
-    
   };
 
-  const handleRemoveContact = id => dispatch(deleteContact({ id }));
+const onOpen = () => {
+setQwe(false);
+}
 
-  const getVisibleContacts = () => {
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  };
+  window.addEventListener('keydown', e => {
+    e.code === 'Space' && onCloseModal();
+  });
 
-  const handleFilterChange = e => {
-    dispatch(changeFilter(e.currentTarget.value));
-  };
+  window.addEventListener('keydown', e => {
+    e.code === 'Space' &&  onOpen();
+  });
 
-  return (
-    <>
-      <ContactForm onSubmit={OnSubmit} />
-      {contacts.length > 0 && (
-        <div className={s.container}>
-          <h2 className={s.header_contact}>Contacts</h2>
-          <Filter onChange={handleFilterChange} />
-          <ContactList
-            onRemove={handleRemoveContact}
-            contacts={getVisibleContacts()}
-          />
-        </div>
-      )}
-    </>
-  );
+  return(
+  <>
+  {showModal && <Layout />}
+  {qwe && <Modal />}
+
+  </>) 
 }
