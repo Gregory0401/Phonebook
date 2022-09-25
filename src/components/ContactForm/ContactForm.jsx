@@ -1,94 +1,80 @@
-import  React from 'react';
-import s from '../ContactForm/ContactForm.module.css';
-import {useState} from 'react';
+import { useState } from 'react';
+import { nanoid } from 'nanoid';
+import {
+  useGetContactsQuery,
+  useAddContactMutation,
+} from 'contactsStorage/contactsAPI';
+import Notiflix from 'notiflix';
 
+import styles from './ContactForm.module.css';
 
+export const ContactForm = () => {
+  const [form, setForm] = useState({ name: '', phone: '' });
+  const { data: contacts } = useGetContactsQuery();
+  const [addContact, { isLoading }] = useAddContactMutation();
 
-export default function ContactForm ({onSubmit}){
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-
-
-  const handleChange = event => {
-    const{ name, value} = event.currentTarget;
-  switch(name) {
-    case 'name':
-      setName(value);
-      break;
-
-    case 'number':
-      setNumber(value);
-      break;
-    
-    default: 
-      return;
-    }
-  }
-  
- const  resetForm = () => {setName(''); setNumber('')}
-  const onHandleSubmit = e => {
-    e.preventDefault();
-    onSubmit(name, number);
-
-    resetForm()
+  const handleChange = e => {
+    const { name, value } = e.currentTarget;
+    setForm(prevForm => ({ ...prevForm, [name]: value }));
   };
 
+  const handleSubmit = element => {
+    element.preventDefault();
+    const data = { id: nanoid(), ...form };
+    if (
+      contacts.find(
+        contact => contact.name.toLowerCase() === data.name.toLowerCase()
+      )
+    ) {
+      inputClean();
+      return Notiflix.Notify.failure(`${data.name} is already in phonebook`);
+    }
+    addContact(data);
 
+    inputClean();
+  };
 
-    
-        return (
+  const inputClean = () => {
+    setForm({ name: '', phone: '' });
+  };
 
-            <form className={s.form} onSubmit={onHandleSubmit}>
-            <h1 className={s.header}>📞 Phonebook</h1>
-            <div  className={s.container}>
-           <label htmlFor="name" className={s.label_name}>
-            Name 
-            <input 
+  const { name, phone } = form;
+
+  return (
+    <div className={styles.section}>
+      <form onSubmit={handleSubmit}>
+        <label className={styles.label}>
+          Name
+          <input
+            className={styles.input}
             type="text"
             name="name"
-            id="name"
-            className={s.input_name}
-            placeholder="Enter name ← "
-            value={name}
-            onChange={handleChange}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            />
-            </label> 
-            <label className={s.label_number}>
-              Number
-              <input
-              type="tel"
-              name="number"
-              id="number"
-              className={s.input_number}
-              value={number}
-              onChange={handleChange}
-              placeholder="Enter phone number ← "
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-              required
-              />
-            </label>
-            <button className={s.button} type="submit" onClick={() => { }}>Add contact</button>
-            </div>
-            </form>
-        )
-        
-    }
-  
-  
-  
-  
-  
+            value={name}
+            onChange={handleChange}
+          />
+        </label>
 
+        <label className={styles.label}>
+          Number
+          <input
+            className={styles.input}
+            type="tel"
+            name="phone"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            value={phone}
+            onChange={handleChange}
+          />
+        </label>
 
-
-
-
-
-
-
-
-
+        <button type="submit" className={styles.button} disabled={isLoading}>
+          Add contact
+        </button>
+      </form>
+    </div>
+  );
+};
