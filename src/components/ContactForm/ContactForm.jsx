@@ -6,7 +6,7 @@ import {
 } from 'contactsStorage/contactsAPI';
 import Notiflix from 'notiflix';
 
-import styles from './ContactForm.module.css';
+import s from './ContactForm.module.css';
 
 export const ContactForm = () => {
   const [form, setForm] = useState({ name: '', phone: '' });
@@ -41,12 +41,13 @@ export const ContactForm = () => {
   const { name, phone } = form;
 
   return (
-    <div className={styles.section}>
-      <form onSubmit={handleSubmit}>
-        <label className={styles.label}>
+    <div>
+      <form onSubmit={handleSubmit} className={s.form}>
+        <h1 className={s.header}>📞 Phonebook</h1>
+        <label  className={s.label_name}>
           Name
           <input
-            className={styles.input}
+            className={s.input_name}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -54,13 +55,14 @@ export const ContactForm = () => {
             required
             value={name}
             onChange={handleChange}
+            placeholder="Enter name ← "
           />
         </label>
 
-        <label className={styles.label}>
+        <label className={s.label_number}>
           Number
           <input
-            className={styles.input}
+            className={s.input_number}
             type="tel"
             name="phone"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -68,10 +70,11 @@ export const ContactForm = () => {
             required
             value={phone}
             onChange={handleChange}
+            placeholder="Enter phone number ← "
           />
         </label>
 
-        <button type="submit" className={styles.button} disabled={isLoading}>
+        <button type="submit" className={s.button} disabled={isLoading}>
           Add contact
         </button>
       </form>

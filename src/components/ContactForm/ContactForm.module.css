@@ -1,50 +1,68 @@
-.section {
-  display: block;
-  width: 500px;
-  margin: 0 auto;
-  margin-bottom: 50px;
-  padding: 20px;
-  background-color: aquamarine;
-  border: 1px solid black;
-  border-radius: 5px;
-  box-shadow: 0px 5px 5px 0px #000000;
-}
-
-.label {
-  display: flex;
-  flex-direction: column;
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.input {
+.form {
   width: 300px;
-  height: 20px;
-  margin-top: 10px;
-  padding-left: 10px;
-  border: 1px solid black;
-  border-radius: 5px;
-  outline: none;
-}
+  height: 250px;
+  background-color: rgb(151, 154, 154);
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: block;
+  flex-direction: column;
+  border-radius: 10px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow:  6px 6px 6px rgba(0, 0, 0, 0.5);
+  }
+  .header {
+      margin-left: 40px;
+      margin-bottom: 30px;
+      text-shadow:  2px 2px 2px rgba(87, 85, 85, 0.8)
+  }
+  .label_name {
+      text-shadow:  2px 2px 2px rgba(0, 0, 0, 0.5)
+  }
+  .input_name {
+      margin-bottom: 10px;
+      width: 95%;
+      border-radius: 5px;
+      border: none;
+  }
+  .input_name:hover.button{
+      color:brown
+  }
+  
 
-.input:hover,
-.input:focus {
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-}
-
-.button {
-  width: 200px;
-  height: 30px;
-  margin-top: 10px;
-  border-radius: 5px;
-  border: 1px solid black;
-  background-color: teal;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.button:hover {
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-}
+  .label_number {
+      text-shadow:  2px 2px 2px rgba(0, 0, 0, 0.5)
+  }
+  .input_number {
+      width: 95%;
+      border-radius: 5px;
+      border: none;
+  }
+  .button{
+      margin-top: 20px;
+      width:100px;
+      height: 30px;
+      border-radius: 10px;
+      border: none;
+      box-shadow: 5px 5px 5px rgb(113, 110, 110);
+  }
+  
+  .button:hover {
+      border: 2px solid grey;
+      background-color: rgb(59, 58, 58);
+      color:aliceblue;
+      cursor:pointer;
+      transform:scale(1.3);
+      border: none;
+  }
+  .input_number:hover{
+      box-shadow:  4px 4px 4px rgba(0, 0, 0, 0.5);
+      height: 30px;
+      cursor:alias
+  }
+  .input_name:hover{
+      box-shadow:  4px 4px 4px rgba(0, 0, 0, 0.5);
+      height: 30px;
+  }

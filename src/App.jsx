@@ -1,21 +1,32 @@
-import { ContactForm } from './components/ContactForm';
-import { ContactsList } from './components/ContactsList';
-import { ContactsFilter } from './components/ContactsFilter';
+import { React, useState } from 'react';
+import { Layout } from './Layout';
+import {Modal} from './components/Modal/Modal'
 
-import styles from './App.module.css';
+export default function App() {
+  const [showModal, setShowModal] = useState(false);
+ const [qwe, setQwe] = useState(true);
 
-export const App = () => {
-  return (
-    <>
-      <div className={styles.section}>
-        <h1 className={styles.title}>Phonebook</h1>
-      </div>
-      <ContactForm />
-      <div className={styles.section}>
-        <h2 className={styles.title}>Contacts</h2>
-      </div>
-      <ContactsFilter />
-      <ContactsList />
-    </>
-  );
-};
+  const onCloseModal = () => {
+    setShowModal(true);
+  
+  };
+
+const onOpen = () => {
+setQwe(false);
+}
+
+  window.addEventListener('keydown', e => {
+    e.code === 'Space' && onCloseModal();
+  });
+
+  window.addEventListener('keydown', e => {
+    e.code === 'Space' &&  onOpen();
+  });
+
+  return(
+  <>
+  {showModal && <Layout />}
+  {qwe && <Modal />}
+
+  </>) 
+}

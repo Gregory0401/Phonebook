@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { changeFilter } from 'contactsStorage/contactsSlice';
 
-import styles from './ContactsFilter.module.css';
+import s from './ContactsFilter.module.css';
 
 export const ContactsFilter = () => {
   const dispatch = useDispatch();
@@ -12,13 +12,13 @@ export const ContactsFilter = () => {
   };
 
   return (
-    <div className={styles.section}>
-      <h2 className={styles.title}>Find contacts by name</h2>
+   
       <input
-        className={styles.input}
+        className={s.filter}
         onChange={onChange}
         value={filter}
+        placeholder="Find contact by name ←"
       ></input>
-    </div>
+   
   );
 };
