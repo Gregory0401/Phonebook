@@ -3,7 +3,7 @@ import { changeFilter } from 'contactsStorage/contactsSlice';
 
 import s from './ContactsFilter.module.css';
 
-export const ContactsFilter = () => {
+ export const ContactsFilter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(state => state.contacts.filter);
 
@@ -22,3 +22,5 @@ export const ContactsFilter = () => {
    
   );
 };
+
+

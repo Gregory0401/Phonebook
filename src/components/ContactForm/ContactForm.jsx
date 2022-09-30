@@ -9,7 +9,7 @@ import Notiflix from 'notiflix';
 import s from './ContactForm.module.css';
 
 export const ContactForm = () => {
-  const [form, setForm] = useState({ name: '', phone: '' });
+  const [form, setForm] = useState({ name: '', number: '' });
   const { data: contacts } = useGetContactsQuery();
   const [addContact, { isSuccess, isLoading }] = useAddContactMutation();
 
@@ -35,7 +35,7 @@ export const ContactForm = () => {
   };
 
   const inputClean = () => {
-    setForm({ name: '', phone: '' });
+    setForm({ name: '', number: '' });
   };
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export const ContactForm = () => {
     }
   }, [isSuccess]);
 
-  const { name, phone } = form;
+  const { name, number } = form;
 
   return (
     <div>
@@ -70,11 +70,11 @@ export const ContactForm = () => {
           <input
             className={s.input_number}
             type="tel"
-            name="phone"
+            name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            value={phone}
+            value={number}
             onChange={handleChange}
             placeholder="Enter phone number ← "
           />

@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useGetContactsQuery } from 'contactsStorage/contactsAPI';
 import { ContactsListItem } from './ContactsListItem';
 import { Rings } from 'react-loader-spinner';
-
+import {ContactsFilter} from '../ContactsFilter/ContactsFilter'
 
 import s from './ContactsList.module.css';
 
@@ -26,7 +26,7 @@ export const ContactsList = () => {
 
 <div className={s.container}>
   <h2 className={s.header_contact}>☏ Contacts</h2>
-  {/* <ContactsFilter /> */}
+  <ContactsFilter />
 <ul className={s.list}>
 
 {isLoading && (
@@ -41,8 +41,8 @@ export const ContactsList = () => {
         )}
 
 {isSuccess &&
-items.map(({ id, name, phone }) => (
-  <ContactsListItem key={id} id={id} name={name} number={phone} />
+items.map(({ id, name, number }) => (
+  <ContactsListItem key={id} id={id} name={name} number={number} />
 ))}
 
 {items && items.length === 0 && (
