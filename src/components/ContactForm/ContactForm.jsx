@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import {
   useGetContactsQuery,
@@ -11,7 +11,7 @@ import s from './ContactForm.module.css';
 export const ContactForm = () => {
   const [form, setForm] = useState({ name: '', phone: '' });
   const { data: contacts } = useGetContactsQuery();
-  const [addContact, { isLoading }] = useAddContactMutation();
+  const [addContact, { isSuccess, isLoading }] = useAddContactMutation();
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -38,13 +38,19 @@ export const ContactForm = () => {
     setForm({ name: '', phone: '' });
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      inputClean();
+    }
+  }, [isSuccess]);
+
   const { name, phone } = form;
 
   return (
     <div>
       <form onSubmit={handleSubmit} className={s.form}>
         <h1 className={s.header}>📞 Phonebook</h1>
-        <label  className={s.label_name}>
+        <label className={s.label_name}>
           Name
           <input
             className={s.input_name}

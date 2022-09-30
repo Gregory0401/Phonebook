@@ -1,32 +1,103 @@
-import { React, useState } from 'react';
-import { Layout } from './Layout';
-import {Modal} from './components/Modal/Modal'
+import { useSelector, useDispatch } from 'react-redux/es/exports';
+import { useEffect, lazy, Suspense } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { authSelectors } from 'authorization';
+import { authOperations } from 'authorization';
+import PrivateRoute from 'routes/PrivateRoutes/PrivateRoutes';
+import PublicRoute from 'routes/PublicRoutes/PublicRouters';
+import Loader from 'components/Loader/Loader';
+import Header from 'components/Header';
 
-export default function App() {
-  const [showModal, setShowModal] = useState(false);
- const [qwe, setQwe] = useState(true);
+const HomePage = lazy(() => import('pages/HomePage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage'));
+const LoginPage = lazy(() => import('pages/LoginPage'));
+const ContactsPage = lazy(() => import('./pages/ContactsPage'));
 
-  const onCloseModal = () => {
-    setShowModal(true);
+export const App = () => {
+  const dispatch = useDispatch();
+  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
+  return (
+    <>
+      {!isFetchingCurrentUser && (
+        <>
+          <Header />
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <PublicRoute>
+                    <HomePage />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="register"
+                element={
+                  <PublicRoute redirectTo="/contacts" restricted>
+                    <RegisterPage />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="login"
+                element={
+                  <PublicRoute redirectTo="/contacts" restricted>
+                    <LoginPage />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="contacts"
+                element={
+                  <PrivateRoute>
+                    <ContactsPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          </Suspense>
+        </>
+      )}
+    </>
+  );
+};
+
+
+
+// import { React, useState } from 'react';
+// import { Layout } from './Layout';
+// import {Modal} from './components/Modal/Modal'
+
+// export default function App() {
+//   const [showModal, setShowModal] = useState(false);
+//  const [qwe, setQwe] = useState(true);
+
+//   const onCloseModal = () => {
+//     setShowModal(true);
   
-  };
+//   };
 
-const onOpen = () => {
-setQwe(false);
-}
+// const onOpen = () => {
+// setQwe(false);
+// }
 
-  window.addEventListener('keydown', e => {
-    e.code === 'Space' && onCloseModal();
-  });
+//   window.addEventListener('keydown', e => {
+//     e.code === 'Space' && onCloseModal();
+//   });
 
-  window.addEventListener('keydown', e => {
-    e.code === 'Space' &&  onOpen();
-  });
+//   window.addEventListener('keydown', e => {
+//     e.code === 'Space' &&  onOpen();
+//   });
 
-  return(
-  <>
-  {showModal && <Layout />}
-  {qwe && <Modal />}
+//   return(
+//   <>
+//   {showModal && <Layout />}
+//   {qwe && <Modal />}
 
-  </>) 
-}
+//   </>) 
+// }
