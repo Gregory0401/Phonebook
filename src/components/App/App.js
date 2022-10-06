@@ -1,6 +1,5 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Switch } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import { ToastContainer } from 'react-toastify';
@@ -11,88 +10,99 @@ import Container from '../Container';
 import PrivateRoute from 'routes/PrivateRoute';
 import PublicRoute from 'routes/PublicRoute';
 import { getFetchingCurrentUser } from 'redux/auth/auth-selectors';
+import { Routes } from 'react-router';
+import { Route } from 'react-router-dom';
 
 const HomeView = lazy(() =>
-    import('views/HomeView' /* webpackChunkName: "home-page" */),
+  import('views/HomeView' /* webpackChunkName: "home-page" */)
 );
 const LoginView = lazy(() =>
-    import('views/LoginView' /* webpackChunkName: "login-page" */),
+  import('views/LoginView' /* webpackChunkName: "login-page" */)
 );
 const RegisterView = lazy(() =>
-    import('views/RegisterView' /* webpackChunkName: "register-page" */),
+  import('views/RegisterView' /* webpackChunkName: "register-page" */)
 );
 const ContactsView = lazy(() =>
-    import('views/ContactsView' /* webpackChunkName: "contacts-page" */),
+  import('views/ContactsView' /* webpackChunkName: "contacts-page" */)
 );
 
 export default function App() {
-    const dispatch = useDispatch();
-    const isFetchingCurrentUser = useSelector(getFetchingCurrentUser);
+  const dispatch = useDispatch();
+  const isFetchingCurrentUser = useSelector(getFetchingCurrentUser);
 
-    useEffect(() => {
-        dispatch(fetchCurrentUser());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
 
-    return (
+  return (
+    <>
+      {isFetchingCurrentUser ? (
+        <Loader
+          className="Spinner"
+          type="Circles"
+          color="#1b39e2"
+          height={300}
+          width={300}
+        />
+      ) : (
         <>
-            {isFetchingCurrentUser ? (
+          <AppBar />
+          <ToastContainer />
+          <Container>
+            <Suspense
+              fallback={
                 <Loader
-                    className="Spinner"
-                    type="Circles"
-                    color="#1b39e2"
-                    height={300}
-                    width={300}
+                  className="Spinner"
+                  type="Circles"
+                  color="#1b39e2"
+                  height={300}
+                  width={300}
                 />
-            ) : (
-                <>
-                    <AppBar />
-                    <ToastContainer />
-                    <Container>
-                        <Suspense
-                            fallback={
-                                <Loader
-                                    className="Spinner"
-                                    type="Circles"
-                                    color="#1b39e2"
-                                    height={300}
-                                    width={300}
-                                />
-                            }
-                        >
-                            <Switch>
-                                <PublicRoute exact path="/">
-                                    <HomeView />
-                                </PublicRoute>
+              }
+            >
+              <Routes>
+                <Route
+                  path="/"
+                  exact
+                  element={
+                    <PublicRoute>
+                      <HomeView />
+                    </PublicRoute>
+                  }
+                />
+                <Route
+                  exact
+                  path="/register"
+                  element={
+                    <PublicRoute redirectTo="/contacts" restricted>
+                      <RegisterView />
+                    </PublicRoute>
+                  }
+                ></Route>
 
-                                <PublicRoute
-                                    exact
-                                    path="/register"
-                                    redirectTo="/contacts"
-                                    restricted
-                                >
-                                    <RegisterView />
-                                </PublicRoute>
+                <Route
+                  exact
+                  path="/login"
+                  element={
+                    <PublicRoute redirectTo="/contacts" restricted>
+                      <LoginView />
+                    </PublicRoute>
+                  }
+                ></Route>
 
-                                <PublicRoute
-                                    exact
-                                    path="/login"
-                                    redirectTo="/contacts"
-                                    restricted
-                                >
-                                    <LoginView />
-                                </PublicRoute>
-
-                                <PrivateRoute
-                                    path="/contacts"
-                                    redirectTo="/login"
-                                >
-                                    <ContactsView />
-                                </PrivateRoute>
-                            </Switch>
-                        </Suspense>
-                    </Container>
-                </>
-            )}
+                <Route
+                  path="/contacts"
+                  element={
+                    <PrivateRoute redirectTo="/login">
+                      <ContactsView />
+                    </PrivateRoute>
+                  }
+                ></Route>
+              </Routes>
+            </Suspense>
+          </Container>
         </>
-    );
+      )}
+    </>
+  );
 }
