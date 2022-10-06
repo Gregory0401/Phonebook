@@ -1,1 +1,0 @@
-export { ContactsFilter } from './ContactsFilter';

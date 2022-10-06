@@ -1,77 +1,46 @@
-.form {
-  width: 300px;
-  height: 250px;
-  background-color: rgb(151, 154, 154);
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  display: block;
-  flex-direction: column;
-  border-radius: 10px;
-  margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow:  6px 6px 6px rgba(0, 0, 0, 0.5);
-  }
-  .header {
-      margin-left: 40px;
-      margin-bottom: 30px;
-      text-shadow:  2px 2px 2px rgba(87, 85, 85, 0.8)
-  }
-  .label_name {
-      text-shadow:  2px 2px 2px rgba(0, 0, 0, 0.5)
-  }
-  .input_name {
-      margin-bottom: 10px;
-      width: 95%;
-      border-radius: 5px;
-      border: none;
-  }
-  .input_name:hover.button{
-      color:brown
-  }
-  
-
-  .label_number {
-      text-shadow:  2px 2px 2px rgba(0, 0, 0, 0.5)
-  }
-  .input_number {
-      width: 95%;
-      border-radius: 5px;
-      border: none;
-  }
-  .button{
-      margin-top: 20px;
-      display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    width: 100px;
-    padding: 5px;
-    font-size: 14px;
+.title {
+    font-size: 40px;
     font-weight: bold;
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: 8px;
-    background-color:lightslategray;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.75);
-    transition: all 250ms linear;
+    text-align: center;
+    text-shadow: 0px 0 10px#6be944;
+    color: #a5e905dc;
+    text-align: center;
+    border-radius: 20px;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    max-width: 200px;
+    width: 100%;
+    padding-bottom: 15px;
+    color: #a5e905dc;
+}
+.formInput {
+    padding-left: 10px;
+    margin-top: 2px;
+    height: 25px;
+    border-radius: 10px;
+}
+.formInput:hover,
+.formInput:focus {
+    outline: none;
     border: none;
-  }
-  
-  .button:hover {
-    background-color: rgb(245, 245, 245);
-    border: 2px solid rgb(13, 13, 13);
-    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.75);
-    transition: all 250ms linear;
-    color:black;
-  }
-  .input_number:hover{
-      box-shadow:  4px 4px 4px rgba(0, 0, 0, 0.5);
-      height: 30px;
-      cursor:alias
-  }
-  .input_name:hover{
-      box-shadow:  4px 4px 4px rgba(0, 0, 0, 0.5);
-      height: 30px;
-  }
+    box-shadow: 0 14px 28px rgba(193, 252, 57, 0.801),
+        0 10px 10px rgba(127, 206, 24, 0.719);
+}
+
+.contactForm {
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    padding: 20px;
+    display: block;
+    border: 2px solid#a5e905dc;
+    border-radius: 20px;
+    text-shadow: 0 0 15px #a5e905dc;
+    background-color: rgba(140, 141, 138, 0.801);
+}
