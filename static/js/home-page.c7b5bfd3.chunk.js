@@ -1,0 +1,2 @@
+(this.webpackJsonpphonebook=this.webpackJsonpphonebook||[]).push([[1],{114:function(e,t,o){e.exports={title:"HomeView_title__2K0nF",text:"HomeView_text__WNtXU"}},121:function(e,t,o){"use strict";o.r(t),o.d(t,"default",(function(){return i}));var n=o(114),s=o.n(n),c=o(1);function i(){return Object(c.jsxs)("h1",{className:s.a.title,children:[Object(c.jsx)("b",{className:s.a.text,children:"Welcome!"})," To use the Phone Book ",Object(c.jsx)("br",{})]})}}}]);
+//# sourceMappingURL=home-page.c7b5bfd3.chunk.js.map
