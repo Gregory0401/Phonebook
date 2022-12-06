@@ -5,4 +5,7 @@
 <img src="./readme/SignIn.png" alt="singin" width=400 height=240>
 <img src="./readme/LogIn.png" alt="login" width=400 height=240>
 </div>
-<img src="./readme/Adaptiv.png" alt="singin" width=200 height=450>
+<p align="left">Contacts can be added, searched, deleted</p>
+<img src="./readme/Contacts.png"  width=400 height=240>
+<p align="left">Also the phone book is adaptive for mobile devices</p>
+<img src="./readme/Adaptiv.png"  width=250 height=450>
