@@ -1,4 +1,5 @@
 <h1 align="center">Application designed to store contacts.</h1>
+<p>Thanks to this application you will be able to store your contacts.</p>
 <img src="./readme/Home.png" alt="домашняя страничка">
 <p align="left">The phone book has a registration function, for private access</p>
 <div display="flex" gap="20px">
