@@ -1,3 +1,5 @@
+<p align="left">Individual project</p>
+
 <h1 align="center">Application designed to store contacts.</h1>
 <p>Thanks to this application you will be able to store your contacts.</p>
 <img src="./readme/Home.png" alt="домашняя страничка">
