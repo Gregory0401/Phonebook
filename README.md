@@ -13,4 +13,4 @@
 <p align="left">Also the phone book is adaptive for mobile devices</p>
 <img src="./readme/Adaptiv.png"  width=250 height=450>
 
-<h2 align="left">The following technologies were used in the development of this application: HTML/CSS Modules/JavaScript/Redux</h2>
+<h2 align="left">The following technologies were used in the development of this application: HTML/CSS Modules/JavaScript/React/Redux</h2>
